@@ -13,10 +13,5 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data := struct {
-		RandomValue string
-	}{
-		RandomValue: "",
-	}
-	tpl.ExecuteTemplate(w, "layout", data)
+	tpl.ExecuteTemplate(w, "layout", nil)
 }
