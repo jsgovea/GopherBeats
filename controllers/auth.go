@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-func Home(w http.ResponseWriter, r *http.Request) {
-	tpl, err := template.ParseFiles("views/_layout.html", "views/index.html")
+func Login(w http.ResponseWriter, r *http.Request) {
+	tpl, err := template.ParseFiles("views/_layout.html", "views/auth/login.html")
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -14,12 +14,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data := struct {
-		Title   string
-		Message string
+		RandomValue string
 	}{
-		Title:   "Home page",
-		Message: "Hello world from Go!",
+		RandomValue: "",
 	}
-
 	tpl.ExecuteTemplate(w, "layout", data)
 }

@@ -20,7 +20,9 @@ func main() {
 	filesDir := http.Dir(filepath.Join(worDir, "static"))
 	FileServer(router, "/static", filesDir)
 
+	// Routes
 	router.Get("/", controllers.Home)
+	router.Get("/login", controllers.Login)
 
 	http.ListenAndServe(":8080", router)
 
