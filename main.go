@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/joho/godotenv"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -12,19 +14,28 @@ import (
 )
 
 func main() {
-	fmt.Println("Running server on http://localhost:8080/")
 	router := chi.NewRouter()
-
+	// Config env
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 	// Config for static files
 	worDir, _ := os.Getwd()
 	filesDir := http.Dir(filepath.Join(worDir, "static"))
 	FileServer(router, "/static", filesDir)
 
+	loginController := controllers.LoginController{}
+
 	// Routes
+	// Index
 	router.Get("/", controllers.Home)
-	router.Get("/login", controllers.Login)
+	// Login
+	router.Get("/login", loginController.Get)
+	router.Post("/login", loginController.Post)
 
 	http.ListenAndServe(":8080", router)
+	fmt.Println("Running server on http://localhost:8080/")
 
 }
 

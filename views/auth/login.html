@@ -1,5 +1,23 @@
 {{ define "content" }}
 
 <h1>Login page 1</h1>
+<sl-button variant="success">Connect with Spofity</sl-button>
+
+<form class="input-validation-required" action="/login" method="post">
+    <sl-input name="name" label="Name" required></sl-input>
+    <br />
+    <sl-select label="Favorite Animal" clearable required>
+        <sl-option value="birds">Birds</sl-option>
+        <sl-option value="cats">Cats</sl-option>
+        <sl-option value="dogs">Dogs</sl-option>
+        <sl-option value="other">Other</sl-option>
+    </sl-select>
+    <br />
+    <sl-textarea name="comment" label="Comment" required></sl-textarea>
+    <br />
+    <sl-checkbox required>Check me before submitting</sl-checkbox>
+    <br /><br />
+    <sl-button type="submit" variant="primary">Submit</sl-button>
+</form>
 
 {{ end }}
